@@ -1,0 +1,112 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="modal-container">
+  <!-- Título con icono -->
+  <h2 mat-dialog-title class="modal-title">
+    <mat-icon color="primary">person</mat-icon>
+    {{ title }}
+  </h2>
+
+  <!-- Formulario -->
+  <form [formGroup]="studentForm" (ngSubmit)="save()">
+    <div mat-dialog-content>
+
+      <div class="form-row">
+        <!-- Nombres -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Nombres</mat-label>
+          <mat-icon matPrefix>person</mat-icon>
+          <input matInput formControlName="nombres" placeholder="Ingrese nombres">
+          <mat-error *ngIf="hasError('nombres', 'required')">Campo requerido</mat-error>
+          <mat-error *ngIf="hasError('nombres', 'maxlength')">Máximo 100 caracteres</mat-error>
+        </mat-form-field>
+
+        <!-- Apellidos -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Apellidos</mat-label>
+          <mat-icon matPrefix>person_outline</mat-icon>
+          <input matInput formControlName="apellidos" placeholder="Ingrese apellidos">
+          <mat-error *ngIf="hasError('apellidos', 'required')">Campo requerido</mat-error>
+          <mat-error *ngIf="hasError('apellidos', 'maxlength')">Máximo 100 caracteres</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <!-- DNI -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>DNI</mat-label>
+          <mat-icon matPrefix>badge</mat-icon>
+          <input matInput formControlName="dni" placeholder="Ingrese DNI">
+          <mat-error *ngIf="hasError('dni', 'required')">Requerido</mat-error>
+          <mat-error *ngIf="hasError('dni', 'pattern')">Debe tener 8 dígitos</mat-error>
+        </mat-form-field>
+
+        <!-- Fecha de Nacimiento -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" placeholder="Seleccione fecha">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="hasError('fechaNacimiento', 'required')">Requerido</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <!-- Teléfono -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Teléfono</mat-label>
+          <mat-icon matPrefix>call</mat-icon>
+          <input matInput formControlName="telefono" placeholder="Ingrese teléfono">
+          <mat-error *ngIf="hasError('telefono', 'pattern')">Debe empezar con 9 y tener 9 dígitos</mat-error>
+        </mat-form-field>
+
+        <!-- Correo -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Correo</mat-label>
+          <mat-icon matPrefix>mail</mat-icon>
+          <input matInput type="email" formControlName="correo" placeholder="Ingrese correo">
+          <mat-error *ngIf="hasError('correo', 'required')">Requerido</mat-error>
+          <mat-error *ngIf="hasError('correo', 'email')">Formato inválido</mat-error>
+          <mat-error *ngIf="hasError('correo', 'maxlength')">Máximo 100 caracteres</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <!-- Programa -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Programa</mat-label>
+          <mat-icon matPrefix>school</mat-icon>
+          <mat-select formControlName="idPrograma">
+            <mat-option *ngFor="let programa of programas" [value]="programa.idPrograma">
+              {{ programa.nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('idPrograma', 'required')">Requerido</mat-error>
+        </mat-form-field>
+
+        <!-- Ubigeo -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Ubigeo</mat-label>
+          <mat-icon matPrefix>location_on</mat-icon>
+          <mat-select formControlName="idUbigeo">
+            <mat-option *ngFor="let u of ubigeos" [value]="u.idUbigeo">
+              {{ u.departamento }} - {{ u.provincia }} - {{ u.distrito }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('idUbigeo', 'required')">Requerido</mat-error>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <!-- Botones -->
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-stroked-button color="warn" type="button" (click)="cancel()">
+        <mat-icon>cancel</mat-icon> Cancelar
+      </button>
+      <button mat-flat-button color="primary" type="submit">
+        <mat-icon>save</mat-icon> Guardar
+      </button>
+    </div>
+  </form>
+</div>
