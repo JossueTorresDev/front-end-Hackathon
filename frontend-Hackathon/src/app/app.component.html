@@ -1,0 +1,94 @@
+<!-- Ocultar layout completo cuando estamos en /login -->
+<div class="dashboard-container" *ngIf="!isLoginRoute">
+  <!-- SIDEBAR -->
+  <div class="sidenav" [class.collapsed]="isCollapsed">
+    <div class="logo-container">
+      <img src="../assets/img/logoAkiExpress.png" alt="Logo" class="logo">
+      <h2 class="app-title" *ngIf="!isCollapsed">AKI EXPRESS</h2>
+      <button class="toggle-btn" (click)="isCollapsed = !isCollapsed">
+        <mat-icon>{{ isCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+      </button>
+    </div>
+
+    <!-- Menú -->
+    <div class="menu-container">
+      <div class="menu-group">
+        <a routerLink="/dashboard" routerLinkActive="active-link" class="menu-item">
+          <mat-icon>home</mat-icon>
+          <span *ngIf="!isCollapsed">Menú</span>
+        </a>
+      </div>
+
+      <div class="menu-group">
+        <div class="menu-separator" *ngIf="!isCollapsed">Gestión</div>
+        <div class="menu-separator-icon" *ngIf="isCollapsed">
+          <mat-icon class="separator-icon">settings</mat-icon>
+        </div>
+        <a routerLink="/vendedor" routerLinkActive="active-link" class="menu-item">
+          <mat-icon>person</mat-icon>
+          <span *ngIf="!isCollapsed">Vendedor</span>
+        </a>
+        <a routerLink="/cliente" routerLinkActive="active-link" class="menu-item">
+          <mat-icon>group</mat-icon>
+          <span *ngIf="!isCollapsed">Cliente</span>
+        </a>
+        <a routerLink="/producto" routerLinkActive="active-link" class="menu-item">
+          <mat-icon>business</mat-icon>
+          <span *ngIf="!isCollapsed">Producto</span>
+        </a>
+      </div>
+
+      <div class="menu-group">
+        <div class="menu-separator" *ngIf="!isCollapsed">Operaciones</div>
+        <div class="menu-separator-icon" *ngIf="isCollapsed">
+          <mat-icon class="separator-icon">swap_horiz</mat-icon>
+        </div>
+        <a routerLink="/venta" routerLinkActive="active-link" class="menu-item">
+          <mat-icon>shopping_cart</mat-icon>
+          <span *ngIf="!isCollapsed">Venta</span>
+        </a>
+        <a routerLink="/compra" routerLinkActive="active-link" class="menu-item">
+          <mat-icon>store</mat-icon>
+          <span *ngIf="!isCollapsed">Compra</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Logout -->
+    <div class="user-info" [class.user-collapsed]="isCollapsed">
+      <div class="user-details" *ngIf="!isCollapsed">
+        <button class="logout-button" (click)="logout()">
+  <mat-icon>exit_to_app</mat-icon> Salir
+</button>
+
+
+      </div>
+      <button class="logout-icon-only" *ngIf="isCollapsed" (click)="logout()">
+  <mat-icon>exit_to_app</mat-icon>
+</button>
+
+    </div>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-panel" [class.expanded]="isCollapsed">
+    <div class="header-area">
+      <div class="header-left">
+        <button class="menu-toggle-mobile" (click)="isCollapsed = !isCollapsed">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div class="breadcrumb">
+          <span>Dashboard</span> / <span>{{ getCurrentRouteName() }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aquí se cargan las rutas -->
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<!-- SIEMPRE renderiza el router-outlet, para que el login se muestre -->
+<router-outlet *ngIf="isLoginRoute"></router-outlet>

@@ -1,0 +1,157 @@
+<div class="container mat-elevation-z8">
+  <div class="loading-shade" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+
+
+  <div class="error-message" *ngIf="error">
+    <h3>{{ error }}</h3>
+  </div>
+
+
+  <div class="table-header">
+    <h2>Lista de Compras</h2>
+    <button mat-raised-button color="primary" (click)="openPurchaseModal()">
+      <mat-icon>add</mat-icon> Nueva Compra
+    </button>
+  </div>
+
+
+  <div class="filter-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Filtrar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Buscar compras...">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+
+  <div class="status-switcher">
+    <mat-button-toggle-group #statusToggle="matButtonToggleGroup"
+                             [(ngModel)]="statusFilter"
+                             (change)="applyStatusFilter()">
+      <mat-button-toggle value="A">Activas</mat-button-toggle>
+      <mat-button-toggle value="I">Inactivas</mat-button-toggle>
+      <mat-button-toggle value="all">Todas</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+
+  <div class="responsive-table-container">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 sales-table">
+
+
+      <!-- ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let purchase"> {{purchase.id}} </td>
+      </ng-container>
+
+
+      <!-- Fecha -->
+      <ng-container matColumnDef="datePurchase">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+        <td mat-cell *matCellDef="let purchase"> {{ purchase.datePurchase | date:'yyyy-MM-dd' }} </td>
+      </ng-container>
+
+
+      <!-- Nombre -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+        <td mat-cell *matCellDef="let purchase"> {{purchase.name}} </td>
+      </ng-container>
+
+
+      <!-- Apellido -->
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
+        <td mat-cell *matCellDef="let purchase"> {{purchase.lastName}} </td>
+      </ng-container>
+
+
+      <!-- Tipo de Operación -->
+      <ng-container matColumnDef="operationType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de Operación </th>
+        <td mat-cell *matCellDef="let purchase"> {{purchase.operationType}} </td>
+      </ng-container>
+
+
+      <!-- Total -->
+      <ng-container matColumnDef="totalAmount">
+        <th mat-header-cell *matHeaderCellDef> Total </th>
+        <td mat-cell *matCellDef="let purchase">
+          {{ calculateTotalAmount(purchase) | currency:'PEN':'symbol':'1.2-2':'es-PE' }}
+        </td>
+      </ng-container>
+
+
+      <!-- Estado -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+        <td mat-cell *matCellDef="let purchase">
+          <span class="status-badge" [ngClass]="{ 'active': purchase.status === 'A', 'inactive': purchase.status === 'I' }">
+            {{ purchase.status === 'A' ? 'Activo' : 'Inactivo' }}
+          </span>
+        </td>
+      </ng-container>
+
+
+      <!-- Acciones -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="actions-column"> Acciones </th>
+        <td mat-cell *matCellDef="let purchase" class="actions-column">
+          <div class="action-buttons">
+            <ng-container *ngIf="purchase.status === 'A'">
+              <button mat-icon-button color="primary" (click)="viewPurchaseDetails(purchase); $event.stopPropagation();" matTooltip="Ver detalles">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button color="accent" (click)="openPurchaseModal(purchase); $event.stopPropagation();" matTooltip="Editar">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deletePurchase(purchase.id); $event.stopPropagation();" matTooltip="Eliminar">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </ng-container>
+
+
+            <ng-container *ngIf="purchase.status === 'I'">
+              <button mat-icon-button color="primary" (click)="viewPurchaseDetails(purchase); $event.stopPropagation();" matTooltip="Ver detalles">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button color="accent" (click)="restorePurchase(purchase.id); $event.stopPropagation();" matTooltip="Restaurar">
+                <mat-icon>restore</mat-icon>
+              </button>
+            </ng-container>
+          </div>
+        </td>
+      </ng-container>
+
+
+      <!-- Descargar PDF -->
+<ng-container matColumnDef="download">
+  <th mat-header-cell *matHeaderCellDef class="actions-column"> PDF </th>
+  <td mat-cell *matCellDef="let purchase" class="actions-column">
+    <button mat-icon-button color="primary" (click)="descargarCompra(purchase.id); $event.stopPropagation();" matTooltip="Descargar Boleta Compra">
+      <mat-icon>picture_as_pdf</mat-icon>
+    </button>
+  </td>
+</ng-container>
+
+
+      <!-- Filas de encabezado y datos -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewPurchaseDetails(row)"></tr>
+
+
+      <!-- Fila cuando no hay datos -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell no-data-cell" [attr.colspan]="displayedColumns.length">
+          No hay datos que coincidan con el filtro
+        </td>
+      </tr>
+    </table>
+  </div>
+
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Paginador de compras"></mat-paginator>
+</div>

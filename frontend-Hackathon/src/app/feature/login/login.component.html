@@ -1,0 +1,26 @@
+<div class="login-background">
+  <div class="login-wrapper">
+    <mat-card class="login-card">
+      <h2 class="login-title">Bienvenido a AKI EXPRESS</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Usuario</mat-label>
+          <mat-icon matPrefix>person</mat-icon>
+          <input matInput formControlName="username" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input matInput type="password" formControlName="password" />
+        </mat-form-field>
+
+        <div *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</div>
+
+        <button mat-raised-button color="primary" class="login-button" type="submit">
+          <mat-icon>login</mat-icon> Ingresar
+        </button>
+      </form>
+    </mat-card>
+  </div>
+</div>

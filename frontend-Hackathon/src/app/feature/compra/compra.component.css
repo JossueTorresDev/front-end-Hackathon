@@ -1,0 +1,259 @@
+/* General container styling */
+.container {
+    position: relative;
+    padding: 16px;
+    margin: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+  }
+  
+  /* Loading overlay */
+  .loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+  }
+  
+  .loading-shade mat-spinner {
+    width: 40px;
+    height: 40px;
+  }
+  
+  /* Error message styling */
+  .error-message {
+    padding: 16px;
+    text-align: center;
+    color: #f44336;
+    background-color: #ffebee;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+  
+  .error-message h3 {
+    margin: 0;
+  }
+  
+  /* Table header with title and add button */
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .table-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  
+  /* Filter container */
+  .filter-container {
+    margin-bottom: 16px;
+  }
+  
+  .filter-container mat-form-field {
+    width: 100%;
+  }
+  
+  /* Status switcher */
+  .status-switcher {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  /* Table container to enable horizontal scrolling */
+  .responsive-table-container {
+    position: relative;
+    overflow-x: auto;
+    width: 100%;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+  }
+  
+  /* Sales table styling */
+  .sales-table {
+    width: 100%;
+    min-width: 100%;
+    table-layout: fixed;
+  }
+  
+  /* Table row styling */
+  .mat-mdc-header-row {
+    background-color: #f5f5f5;
+  }
+  
+  .mat-mdc-row:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+  }
+  
+  .mat-mdc-row:nth-child(even) {
+    background-color: #fafafa;
+  }
+  
+  /* Cell styling */
+  .mat-mdc-cell, .mat-mdc-header-cell {
+    padding: 8px 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Column width definitions - keeping consistent */
+  .mat-column-id {
+    width: 10%;
+    min-width: 50px;
+  }
+  
+  .mat-column-dateSale {
+    width: 15%;
+    min-width: 100px;
+  }
+  
+  .mat-column-customerId, .mat-column-sellerId {
+    width: 15%;
+    min-width: 80px;
+  }
+  
+  .mat-column-paymentMethod {
+    width: 15%;
+    min-width: 100px;
+  }
+  
+  /* Amount column styling */
+  .amount-column, .mat-column-totalAmount {
+    width: 15%;
+    min-width: 100px;
+    text-align: right;
+    font-weight: 500;
+  }
+  
+  /* Actions column styling - FIXED */
+  .actions-column, .mat-column-actions {
+    width: 150px;
+    min-width: 120px;
+    max-width: 150px;
+  }
+  
+  /* Action buttons container */
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .action-buttons button {
+    min-width: 36px;
+    padding: 0;
+  }
+  
+  /* Status badge styling */
+  .status-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+  
+  .status-badge.active {
+    background-color: #e6f4ea;
+    color: #137333;
+  }
+  
+  .status-badge.inactive {
+    background-color: #fce8e6;
+    color: #c5221f;
+  }
+  
+  /* No data message cell */
+  .no-data-cell {
+    text-align: center;
+    padding: 24px;
+    font-style: italic;
+    color: rgba(0, 0, 0, 0.54);
+  }
+  
+  /* Dialog container styles */
+  ::ng-deep .custom-dialog-container .mat-mdc-dialog-container {
+    padding: 0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  ::ng-deep .custom-dialog-container .mat-mdc-dialog-content {
+    max-height: 75vh;
+    padding: 16px;
+  }
+  
+  ::ng-deep .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    opacity: 0.85 !important;
+  }
+  
+  /* Responsive adjustments */
+  @media screen and (max-width: 960px) {
+    .table-header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 16px;
+    }
+    
+    .mat-mdc-paginator-page-size {
+      margin-right: 8px;
+    }
+    
+    .amount-column, .mat-column-totalAmount {
+      min-width: 80px;
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .container {
+      padding: 12px;
+      margin: 10px;
+    }
+    
+    .table-header h2 {
+      text-align: center;
+      width: 100%;
+    }
+    
+    .table-header button {
+      width: 100%;
+    }
+    
+    .actions-column, .mat-column-actions {
+      min-width: 100px;
+    }
+    
+    .mat-column-id {
+      min-width: 40px;
+    }
+    
+    .mat-column-dateSale {
+      min-width: 80px;
+    }
+    
+    .amount-column, .mat-column-totalAmount {
+      min-width: 70px;
+    }
+    
+    .mat-mdc-paginator-range-label {
+      margin: 0 4px 0 4px !important;
+    }
+  }

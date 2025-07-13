@@ -1,0 +1,123 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+<div class="modal-container">
+  <h2 mat-dialog-title class="modal-title">
+    <mat-icon color="primary">inventory_2</mat-icon>
+    {{ title }}
+  </h2>
+
+
+  <form [formGroup]="productForm" (ngSubmit)="save()">
+    <div mat-dialog-content>
+
+
+      <div class="form-row">
+        <!-- Nombre -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Nombre del producto</mat-label>
+          <mat-icon matPrefix>label</mat-icon>
+          <input matInput formControlName="name" placeholder="Ingrese el nombre del producto">
+          <mat-error *ngIf="hasError('name', 'required')">Campo requerido</mat-error>
+          <mat-error *ngIf="hasError('name', 'maxlength')">Máximo 100 caracteres</mat-error>
+          <mat-error *ngIf="hasError('name', 'pattern')">Solo letras, sin números ni símbolos.</mat-error>
+          <mat-error *ngIf="hasError('name', 'soloEspacios')">Por favor, rellene todo (no solo espacios).</mat-error>
+        </mat-form-field>
+
+
+        <!-- Categoría -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Categoría</mat-label>
+          <mat-icon matPrefix>category</mat-icon>
+          <input matInput formControlName="category" placeholder="Ingrese categoría">
+          <mat-error *ngIf="hasError('category', 'required')">Campo requerido</mat-error>
+          <mat-error *ngIf="hasError('category', 'maxlength')">Máximo 100 caracteres</mat-error>
+          <mat-error *ngIf="hasError('category', 'pattern')">Solo letras, sin números ni símbolos.</mat-error>
+          <mat-error *ngIf="hasError('category', 'soloEspacios')">Por favor, rellene todo (no solo espacios).</mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div class="form-row">
+        <!-- Descripción -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Descripción</mat-label>
+          <mat-icon matPrefix>description</mat-icon>
+          <textarea matInput formControlName="description" placeholder="Ingrese una descripción"></textarea>
+          <mat-error *ngIf="hasError('description', 'required')">Campo requerido</mat-error>
+          <mat-error *ngIf="hasError('description', 'maxlength')">Máximo 300 caracteres</mat-error>
+          <mat-error *ngIf="hasError('description', 'soloEspacios')">Por favor, rellene todo (no solo espacios).</mat-error>
+        </mat-form-field>
+
+
+        <!-- Marca -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Marca</mat-label>
+          <mat-icon matPrefix>branding_watermark</mat-icon>
+          <input matInput formControlName="brand" placeholder="Ingrese la marca">
+          <mat-error *ngIf="hasError('brand', 'required')">Campo requerido</mat-error>
+          <mat-error *ngIf="hasError('brand', 'maxlength')">Máximo 100 caracteres</mat-error>
+          <mat-error *ngIf="hasError('brand', 'pattern')">Solo letras, sin números ni símbolos.</mat-error>
+          <mat-error *ngIf="hasError('brand', 'soloEspacios')">Por favor, rellene todo (no solo espacios).</mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div class="form-row">
+        <!-- Precio -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Precio</mat-label>
+          <mat-icon matPrefix>attach_money</mat-icon>
+          <input matInput formControlName="price" placeholder="Ej: 15.50">
+          <mat-error *ngIf="hasError('price', 'required')">Campo requerido</mat-error>
+          <mat-error *ngIf="hasError('price', 'pattern')">Formato inválido. Ej: 15.50</mat-error>
+        </mat-form-field>
+
+
+        <!-- Unidad de medida -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Unidad de medida</mat-label>
+          <mat-icon matPrefix>straighten</mat-icon>
+          <input matInput formControlName="unit_measurement" placeholder="Ej: kg, unidad, litro">
+          <mat-error *ngIf="hasError('unit_measurement', 'required')">Campo requerido</mat-error>
+          <mat-error *ngIf="hasError('unit_measurement', 'maxlength')">Máximo 20 caracteres</mat-error>
+          <mat-error *ngIf="hasError('unit_measurement', 'soloEspacios')">Por favor, rellene todo (no solo espacios).</mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div class="form-row">
+        <!-- Código del producto -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Código del producto</mat-label>
+          <mat-icon matPrefix>qr_code</mat-icon>
+          <input matInput formControlName="code_product" placeholder="Ej: PROD-001">
+          <mat-error *ngIf="hasError('code_product', 'required')">Campo requerido</mat-error>
+          <mat-error *ngIf="hasError('code_product', 'maxlength')">Máximo 06 caracteres</mat-error>
+          <mat-error *ngIf="hasError('code_product', 'minlength')">Mínimo 6 caracteres.</mat-error>
+          <mat-error *ngIf="hasError('code_product', 'soloEspacios')">Por favor, rellene todo (no solo espacios).</mat-error>
+        </mat-form-field>
+
+
+        <!-- Stock -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Stock</mat-label>
+          <mat-icon matPrefix>inventory</mat-icon>
+          <input matInput formControlName="stock" placeholder="Cantidad disponible">
+          <mat-error *ngIf="hasError('stock', 'required')">Campo requerido</mat-error>
+          <mat-error *ngIf="hasError('stock', 'pattern')">Solo números enteros</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-stroked-button color="warn" type="button" (click)="cancel()">
+        <mat-icon>cancel</mat-icon> Cancelar
+      </button>
+      <button mat-flat-button color="primary" type="submit">
+        <mat-icon>save</mat-icon> Guardar
+      </button>
+    </div>
+  </form>
+</div>

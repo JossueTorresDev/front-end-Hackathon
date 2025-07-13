@@ -1,55 +1,47 @@
 {
-  "name": "frontend-hackathon",
+  "name": "AkiExpress",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "serve:ssr:frontend-Hackathon": "node dist/frontend-Hackathon/server/server.mjs"
-  },
-  "prettier": {
-    "overrides": [
-      {
-        "files": "*.html",
-        "options": {
-          "parser": "angular"
-        }
-      }
-    ]
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
-    "@angular/cdk": "^20.1.0",
-    "@angular/common": "^20.1.0",
-    "@angular/compiler": "^20.1.0",
-    "@angular/core": "^20.1.0",
-    "@angular/forms": "^20.1.0",
-    "@angular/material": "^20.1.0",
-    "@angular/platform-browser": "^20.1.0",
-    "@angular/platform-server": "^20.1.0",
-    "@angular/router": "^20.1.0",
-    "@angular/ssr": "^20.1.0",
-    "express": "^5.1.0",
+    "@angular/animations": "^19.2.8",
+    "@angular/cdk": "^19.2.8",
+    "@angular/common": "^19.2.8",
+    "@angular/compiler": "^19.2.8",
+    "@angular/core": "^19.2.8",
+    "@angular/forms": "^19.2.8",
+    "@angular/material": "^19.2.8",
+    "@angular/platform-browser": "^19.2.8",
+    "@angular/platform-browser-dynamic": "^19.2.8",
+    "@angular/router": "^19.2.8",
+    "bodega": "file:",
+    "file-saver": "^2.0.5",
+    "laes": "file:",
+    "laesquinita": "file:",
     "rxjs": "~7.8.0",
-    "sweetalert2": "^11.22.2",
+    "sweetalert2": "^11.17.2",
     "tslib": "^2.3.0",
-    "zone.js": "^0.15.1"
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular/build": "^20.1.0",
-    "@angular/cli": "^20.1.0",
-    "@angular/compiler-cli": "^20.1.0",
-    "@types/express": "^5.0.1",
+    "@angular-devkit/build-angular": "^19.2.7",
+    "@angular/cli": "^19.2.11",
+    "@angular/compiler-cli": "^19.2.8",
+    "@types/file-saver": "^2.0.7",
     "@types/jasmine": "~5.1.0",
-    "@types/node": "^20.17.19",
-    "jasmine-core": "~5.8.0",
+    "@types/node": "^22.14.1",
+    "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.8.2"
+    "typescript": "~5.8.3"
   }
 }

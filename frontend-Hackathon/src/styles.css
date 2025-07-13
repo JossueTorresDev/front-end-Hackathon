@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    overflow-x: hidden;
+  }
+  
+ /* En styles.css */
+.responsive-dialog .mat-dialog-container {
+    padding: 16px;
+    overflow: hidden !important;
+    border-radius: 10px;
+  }
+  
+  .responsive-dialog .mat-dialog-content {
+    overflow: visible !important;
+    max-height: none !important;
+  }
+  
+  .mat-dialog-actions {
+    margin-bottom: 0 !important;
+    padding: 8px 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  /* Para móviles */
+  @media screen and (max-width: 600px) {
+    .responsive-dialog .mat-dialog-container {
+      padding: 12px;
+    }
+    
+    .mat-dialog-actions {
+      justify-content: center;
+    }
+  }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

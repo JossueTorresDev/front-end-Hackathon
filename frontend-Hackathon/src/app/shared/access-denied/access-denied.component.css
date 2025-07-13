@@ -1,0 +1,28 @@
+.access-denied-container {
+  text-align: center;
+  padding: 60px 20px;
+  color: #d32f2f;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.access-denied-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.access-denied-container p {
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+}
+
+.back-button {
+  text-decoration: none;
+  color: white;
+  background-color: #d32f2f;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.back-button:hover {
+  background-color: #b71c1c;
+}

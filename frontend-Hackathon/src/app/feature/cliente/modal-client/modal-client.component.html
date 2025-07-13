@@ -1,0 +1,139 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="modal-container">
+  <!-- Título con icono -->
+  <h2 mat-dialog-title class="modal-title">
+    <mat-icon color="primary">person</mat-icon>
+    {{ title }}
+  </h2>
+
+  <!-- Formulario -->
+  <form [formGroup]="customerForm" (ngSubmit)="save()">
+    <div mat-dialog-content>
+
+      <div class="form-row">
+        <!-- Nombre -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Nombre</mat-label>
+          <mat-icon matPrefix>person</mat-icon>
+          <input matInput formControlName="name" placeholder="Ingrese nombre">
+          <mat-error *ngIf="hasError('name', 'required')">El nombre es requerido</mat-error>
+          <mat-error *ngIf="hasError('name', 'maxlength')">Máximo 100 caracteres</mat-error>
+          <mat-error *ngIf="hasError('name', 'pattern')">Solo letras permitidas</mat-error>
+          <mat-error *ngIf="hasError('name', 'noSoloEspacios')">El nombre no puede contener solo espacios</mat-error>
+
+        </mat-form-field>
+
+        <!-- Apellido -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Apellido</mat-label>
+          <mat-icon matPrefix>person_outline</mat-icon>
+          <input matInput formControlName="lastName" placeholder="Ingrese apellido">
+          <mat-error *ngIf="hasError('lastName', 'required')">El apellido es requerido</mat-error>
+          <mat-error *ngIf="hasError('lastName', 'maxlength')">Máximo 100 caracteres</mat-error>
+          <mat-error *ngIf="hasError('lastName', 'pattern')">Solo letras permitidas</mat-error>
+          <mat-error *ngIf="hasError('lastName', 'noSoloEspacios')">El apellido no puede contener solo espacios</mat-error>
+
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <!-- Tipo de Documento -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Tipo de Documento</mat-label>
+          <mat-icon matPrefix>description</mat-icon>
+          <mat-select formControlName="documentType">
+            <mat-option *ngFor="let type of documentTypes" [value]="type">
+              {{ type }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('documentType', 'required')">Requerido</mat-error>
+        </mat-form-field>
+
+        <!-- Número de Documento -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>N° Documento</mat-label>
+          <mat-icon matPrefix>credit_card</mat-icon>
+          <input matInput formControlName="numberDocument" placeholder="Ingrese número">
+          <mat-error *ngIf="hasError('numberDocument', 'required')">Requerido</mat-error>
+
+<!-- DNI -->
+<mat-error *ngIf="documentTypeValue === 'DNI' && hasError('numberDocument', 'pattern')">
+  El DNI debe tener exactamente 8 dígitos numéricos.
+</mat-error>
+
+<!-- RUC -->
+<mat-error *ngIf="documentTypeValue === 'RUC' && hasError('numberDocument', 'pattern')">
+  El RUC debe tener exactamente 11 dígitos numéricos.
+</mat-error>
+
+<!-- Pasaporte -->
+<mat-error *ngIf="documentTypeValue === 'Pasaporte' && hasError('numberDocument', 'pattern')">
+  El pasaporte debe tener hasta 8 caracteres alfanuméricos.
+</mat-error>
+
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <!-- Fecha de Nacimiento -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <!-- Eliminar el mat-icon matPrefix que es redundante -->
+          <input matInput [matDatepicker]="picker" formControlName="birthdate" placeholder="Seleccione fecha">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="hasError('birthdate', 'required')">Requerido</mat-error>
+          <mat-error *ngIf="hasError('birthdate', 'underage')">Debe tener al menos 18 años</mat-error>
+        </mat-form-field>
+        
+
+        <!-- Teléfono -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Teléfono</mat-label>
+          <mat-icon matPrefix>call</mat-icon>
+          <input matInput formControlName="phone" placeholder="Ingrese teléfono">
+          <mat-error *ngIf="hasError('phone', 'required')">Requerido</mat-error>
+          <mat-error *ngIf="hasError('phone', 'pattern')">Debe empezar con 9 y tener 9 dígitos</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <!-- Email -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <mat-icon matPrefix>mail</mat-icon>
+          <input matInput type="email" formControlName="email" placeholder="Ingrese email">
+          <mat-error *ngIf="hasError('email', 'required')">Requerido</mat-error>
+          <mat-error *ngIf="hasError('email', 'email')">Formato inválido</mat-error>
+          <mat-error *ngIf="hasError('email', 'maxlength')">Máximo 100 caracteres</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <!-- Dirección -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Dirección</mat-label>
+          <mat-icon matPrefix>home</mat-icon>
+          <textarea matInput formControlName="address" rows="2" placeholder="Ingrese dirección"></textarea>
+          <mat-error *ngIf="hasError('address', 'required')">Requerido</mat-error>
+          <mat-error *ngIf="hasError('address', 'maxlength')">Máximo 200 caracteres</mat-error>
+          <mat-error *ngIf="hasError('address', 'noSoloEspacios')">La dirección no puede contener solo espacios</mat-error>
+
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <!-- Botones -->
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-stroked-button color="warn" type="button" (click)="cancel()">
+        <mat-icon>cancel</mat-icon> Cancelar
+      </button>
+      <button mat-flat-button color="primary" type="submit">
+        <mat-icon>save</mat-icon> Guardar
+      </button>
+    </div>
+  </form>
+
+</div>
