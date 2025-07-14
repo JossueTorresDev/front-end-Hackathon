@@ -3,9 +3,10 @@
   flex-direction: column;
   width: 100%;
   box-sizing: border-box;
+  background-color: #fff0f5; /* Fondo rosadito claro */
 }
 
-/* Eliminar overflow y max-height que causan barras de desplazamiento */
+/* Diálogo general */
 ::ng-deep .mat-dialog-content {
   max-height: none !important;
   overflow: visible !important;
@@ -16,21 +17,22 @@
 ::ng-deep .mat-dialog-container {
   padding: 20px;
   overflow: hidden !important;
-  border-radius: 12px; /* Bordes redondeados */
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  background-color: #fff; /* Fondo blanco para mayor claridad */
-  transition: all 0.3s ease; /* Transición para suavizar cambios */
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(236, 64, 122, 0.15);
+  background-color: #fffafc;
+  transition: all 0.3s ease;
 }
 
 ::ng-deep .mat-dialog-container:hover {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Efecto al pasar el mouse */
+  box-shadow: 0 10px 24px rgba(236, 64, 122, 0.2);
 }
 
+/* Estructura del formulario */
 .form-row {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   width: 100%;
 }
 
@@ -48,27 +50,62 @@ mat-form-field {
   width: 100%;
 }
 
-/* Estilo del botón "Guardar" */
-.save-button {
-  background-color: #3f51b5; /* Indigo 500 */
+/* Personaliza campos */
+mat-form-field.mat-form-field {
+  --mat-primary: #ec407a; /* rosa intenso */
+}
+
+.mat-form-field.mat-focused .mat-form-field-outline {
+  border-color: #f06292 !important;
+}
+
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: #ec407a !important;
+}
+
+.mat-input-element {
+  color: #880e4f;
+}
+
+/* Botón GUARDAR */
+.save-button,
+button[color="primary"] {
+  background-color: #ec407a;
   color: white;
   border: none;
-  padding: 10px 20px; /* Espaciado más amplio para mayor área clickeable */
-  border-radius: 6px; /* Bordes más redondeados */
+  padding: 10px 20px;
+  border-radius: 25px;
   font-weight: 500;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px rgba(236, 64, 122, 0.3);
 }
 
-.save-button:hover {
-  background-color: #303f9f; /* Indigo 700 */
+.save-button:hover,
+button[color="primary"]:hover {
+  background-color: #d81b60;
 }
 
-.save-button:focus {
-  outline: 2px solid #c5cae9; /* Indigo 100 */
+.save-button:focus,
+button[color="primary"]:focus {
+  outline: 2px solid #fce4ec;
   outline-offset: 2px;
+}
+
+/* Botón CANCELAR */
+button[color="warn"] {
+  border-color: #f48fb1;
+  color: #f06292;
+}
+
+button[color="warn"]:hover {
+  background-color: #fce4ec;
+}
+
+/* Íconos */
+mat-icon {
+  color: #ec407a;
 }
 
 /* Responsivo para móviles */
